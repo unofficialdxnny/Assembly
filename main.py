@@ -6,6 +6,7 @@ from pystyle import *
 import urllib.request
 import ctypes
 import sys
+from urllib.parse import urlparse
 
 banner = '''
 
@@ -37,8 +38,28 @@ if is_admin():
             for lines in line:
                 os.system(f'choco install {lines} -y --force')
             print(Colors.green + f'Application {lines} installed')
-
+    
+##    def exe_install():
+##        filesize = os.path.getsize("exe.txt")
+##        if filesize == 0:
+##             print("0 executables need to be installed: " + str(filesize))
+##        else:
+##            Write.Print(f"Installing Your executables!", Colors.blue_to_green, interval=0.05)
+##            print('')
+##            with open(f'exe.t', 'r') as b:
+##                lines = b.readlines()
+##                for line in lines:
+##                    url = line
+##                    r = requests.get(url, allow_redirects=True)
+##                    t = urlparse(url).netloc
+##                    print ('.'.join(t.split('.')[-2:]))
+##                    open(f'{t}.exe', 'wb').write(r.content)
+##                    print('')
+##                    sleep(100)
+##
+##    exe_install()
     choco_install()
+
     sleep(5)
 else:
     # Re-run the program with admin rights
