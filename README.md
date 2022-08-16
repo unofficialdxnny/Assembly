@@ -15,6 +15,7 @@ Windows setup script for my Windows machines :)
 
 - Replace the content of `txt` files with obvious information
 - Start the `exe` file 
+- Type your username
 - Click `Yes` to the `UAC` promp (otherwise wont work as it requires chocolatey commands)
 
 
