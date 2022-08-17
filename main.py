@@ -63,26 +63,25 @@ if name == username:
                     os.system(f'choco install {lines} -y --force')
                 print(Colors.green + f'Application {lines} installed')
         
-    ##    def exe_install():
-    ##        filesize = os.path.getsize("exe.txt")
-    ##        if filesize == 0:
-    ##             print("0 executables need to be installed: " + str(filesize))
-    ##        else:
-    ##            Write.Print(f"Installing Your executables!", Colors.blue_to_green, interval=0.05)
-    ##            print('')
-    ##            with open(f'exe.t', 'r') as b:
-    ##                lines = b.readlines()
-    ##                for line in lines:
-    ##                    url = line
-    ##                    r = requests.get(url, allow_redirects=True)
-    ##                    t = urlparse(url).netloc
-    ##                    print ('.'.join(t.split('.')[-2:]))
-    ##                    open(f'{t}.exe', 'wb').write(r.content)
-    ##                    print('')
-    ##                    sleep(100)
-    ##
-    ##    exe_install()
-        choco_install()
+        def cursors():
+            with open(f'cur-loc.txt', 'r+') as cursors:
+                line = cursors.readlines()
+                for lines in line:
+                    path = r"HKEY_CURRENT_USER\Control Panel\Cursors"
+                    cur_loc = f"./Cursors/{cursors}.ani"
+            
+            with open('type.txt', 'r+') as cur_type:
+                line = cur_type.readlines()
+                for lines in line:
+                    type = line
+
+
+            os.system(f"""REG ADD "{path}" /v {type} /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
+
+            ctypes.windll.user32.SystemParametersInfoA(0x57)
+        
+        cursors()
+        ##choco_install()
     
         sleep(5)
     else:
