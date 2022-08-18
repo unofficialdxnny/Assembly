@@ -1,1 +1,8 @@
-.
+Normal Select
+Working in Background
+Precision Select
+Link Select
+Help Select
+Unavailable
+Handwritting
+Busy
