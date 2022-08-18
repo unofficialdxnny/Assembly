@@ -56,7 +56,7 @@ if name == username:
             path = r"HKEY_CURRENT_USER\Control Panel\Cursors"
             ## cur_loc = f"./Cursors/{lines}.ani"
             
-            type = ['Arrow', 'AppStarting', 'Crosshair', 'Hand', 'Help', 'No', 'NWPen', 'Wait']
+            type = ['Arrow', 'AppStarting', 'Crosshair', 'Hand', 'Help', 'No', 'NWPen', 'Wait', 'UpArrow', 'SizeAll', '']
             x = 0
 
 
@@ -75,6 +75,10 @@ if name == username:
             os.system(f"""REG ADD "{path}" /v {type[x]} /t REG_EXPAND_SZ /d "./Cursors/Handwritting.ani" /f""")
             x = +1
             os.system(f"""REG ADD "{path}" /v {type[x]} /t REG_EXPAND_SZ /d "./Cursors/Busy.ani" /f""")
+            x = +1
+            os.system(f"""REG ADD "{path}" /v {type[x]} /t REG_EXPAND_SZ /d "./Cursors/Alternative Select.ani" /f""")
+            x = +1
+            os.system(f"""REG ADD "{path}" /v {type[x]} /t REG_EXPAND_SZ /d "./Cursors/Move.ani" /f""")
             ctypes.windll.user32.SystemParametersInfoA(0x57)
                     
 
