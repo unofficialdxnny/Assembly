@@ -11,8 +11,8 @@ from time import sleep
 from elevate import elevate
 
 
-
 elevate()
+
 banner = '''
 
  █████╗ ███████╗███████╗███████╗███╗   ███╗██████╗ ██╗  ██╗   ██╗
@@ -32,31 +32,57 @@ print(Colorate.Horizontal(Colors.red_to_purple, Center.XCenter(banner)))
 print(Colorate.Horizontal(Colors.red_to_purple, "Getting things ready", 1))
 
 
-choco_path = r'C:/ProgramData/chocolatey'
 
-choco_path_exists = os.path.isdir(choco_path)
-## print(Colorate.Horizontal(Colors.red_to_purple, f"{choco_path_exists}", 1))
+def choco_installer():
+    choco_path = r'C:/ProgramData/chocolatey'
 
-if choco_path_exists == 'False':
-    choco_install = "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))"
-    os.startfile("powershell.exe")
-    sleep(3)
-    kb.write(choco_install)
-    kb.press('enter')
-    print(Colorate.Horizontal(Colors.red_to_purple, f"Chocolatey Not Found. Please run 'install.ps1'", 1))
+    choco_path_exists = os.path.isdir(choco_path)
+    ## print(Colorate.Horizontal(Colors.red_to_purple, f"{choco_path_exists}", 1))
 
-
-
-else:
-    print(Colorate.Horizontal(Colors.red_to_purple, f"Chocolatey is already Installed", 1))
-    sleep(2)
-    print(Colorate.Horizontal(Colors.red_to_purple, f"Installing Selected Applications", 1))
-    with open('choco.ps1', 'r+') as chocolatey_application_install:
+    if choco_path_exists == 'False':
+        print(Colors.red, f"Chocolatey Not Found. Installing...'")
+        choco_install = "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))"
         os.startfile("powershell.exe")
+        sleep(3)
+        kb.write(choco_install)
+        kb.press('enter')
+    else:
+        print(Colors.red, f"Chocolatey Installation Found")
         sleep(2)
-        line = chocolatey_application_install.readlines()
-        for lines in line:
-            kb.write(lines)
-            kb.press('enter')
+        print(Colors.green, f"Installing Selected Applications")
+        with open('choco.ps1', 'r+') as chocolatey_application_install:
+            os.startfile("powershell.exe")
+            sleep(2)
+            line = chocolatey_application_install.readlines()
+            for lines in line:
+                kb.write(lines)
+                kb.press('enter')
 
-    sleep(2)
+def aesthetics():
+    ## Change mouse to .ani
+    path = r"HKEY_CURRENT_USER\Control Panel\Cursors"
+    cur_loc = r"./Cursors/Normal Select.ani"
+    os.system(f"""REG ADD "{path}" /v Default /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
+    os.system(f"""REG ADD "{path}" /v AppStarting /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
+    os.system(f"""REG ADD "{path}" /v Arrow /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
+    os.system(f"""REG ADD "{path}" /v Crosshair /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
+    os.system(f"""REG ADD "{path}" /v Hand /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
+    os.system(f"""REG ADD "{path}" /v Help /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
+    os.system(f"""REG ADD "{path}" /v IBeam /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
+    os.system(f"""REG ADD "{path}" /v No /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
+    os.system(f"""REG ADD "{path}" /v NWPen /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
+    os.system(f"""REG ADD "{path}" /v Person /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
+    os.system(f"""REG ADD "{path}" /v Pin /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
+    os.system(f"""REG ADD "{path}" /v SizeAll /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
+    os.system(f"""REG ADD "{path}" /v SizeNESW /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
+    os.system(f"""REG ADD "{path}" /v SizeNS /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
+    os.system(f"""REG ADD "{path}" /v SizeNWSE /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
+    os.system(f"""REG ADD "{path}" /v SizeWE /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
+    os.system(f"""REG ADD "{path}" /v UpArrow /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
+    os.system(f"""REG ADD "{path}" /v Wait /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
+    ctypes.windll.user32.SystemParametersInfoA(0x57)
+    
+    
+
+aesthetics()
+choco_installer()
