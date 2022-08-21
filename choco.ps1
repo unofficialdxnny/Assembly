@@ -7,7 +7,6 @@ choco install obs-studio -y --force
 choco install wsl -y --force
 choco install wsl-debiangnulinux -y --force
 choco install tor-browser -y --force
-choco install burp-suite-free-edition -y --force
 choco install wireshark -y --force
 choco install nmap -y --force
 choco install steam -y --force
@@ -29,3 +28,4 @@ choco install geforce-experience -y --force
 choco install discord -y --force
 choco install taskbarx -y --force
 choco install translucenttb -y --force
+choco install vscode -y --force

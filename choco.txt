@@ -1,0 +1,28 @@
+Google Chrome
+Speccy
+Telegram
+vlc
+Audacity
+Obs Studio
+wsl
+wsl-debiangnulinux
+TOR
+Wireshark
+Steam
+Epic Games Launcher
+origin
+ds4windows
+Msi Afterburner
+Microsoft Windows Terminal
+Blender
+Rufus
+Git
+Python3
+Winrar
+Teamviewer
+Visual Studio Code
+Nodejs
+Geforce Experience
+Discord
+Taskbarx
+Translucenttb
