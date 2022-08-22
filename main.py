@@ -51,15 +51,18 @@ def choco_installer():
         sleep(2)
         print(Colors.green, f"Installing Selected Applications")
         with open('choco.ps1', 'r+') as chocolatey_application_install:
-            os.startfile("powershell.exe")
+            ## os.startfile("powershell.exe")
             sleep(2)
             line = chocolatey_application_install.readlines()
             for lines in line:
-                kb.write(lines)
-                kb.press('enter')
+                os.system(f"choco install {lines} -y --force")
+                print(Colors.red, f"Installation of {lines} completed!'")
+
+                
 
 def aesthetics():
     ## Change mouse to .ani
+    print(Colors.red, f"Changing mouse settings...'")
     path = r"HKEY_CURRENT_USER\Control Panel\Cursors"
     cur_loc = r"./Cursors/Normal Select.ani"
     os.system(f"""REG ADD "{path}" /v Default /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
@@ -81,8 +84,10 @@ def aesthetics():
     os.system(f"""REG ADD "{path}" /v UpArrow /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
     os.system(f"""REG ADD "{path}" /v Wait /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
     ctypes.windll.user32.SystemParametersInfoA(0x57)
-    
+    print(Colors.red, f"Completed...'")
+
     
 
+
 aesthetics()
-choco_installer()
+## choco_installer()
