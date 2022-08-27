@@ -84,7 +84,15 @@ def aesthetics():
     os.system(f"""REG ADD "{path}" /v UpArrow /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
     os.system(f"""REG ADD "{path}" /v Wait /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
     ctypes.windll.user32.SystemParametersInfoA(0x57)
-    print(Colors.red,f"Completed...'")
+    print(Colors.red,f"Completed Mouse Changes")
+    ## Change WP
+    ctypes.windll.user32.SystemParametersInfoW(20, 0, "Wallpaper.jpeg" , 0)
+
+
+
+    print(Colors.red,f"Failed To Change Windows Wallpaper'")
+    sleep(3)
+
 
 def spotify():
     print(Colors.green,f"Installing Spotify Premium")
@@ -93,7 +101,6 @@ def spotify():
 
     
 
-
-spotify() ## Installs Spotify Premium Patch
 aesthetics() ## Sets visuals up
+spotify() ## Installs Spotify Premium Patch
 ## choco_installer() ## Installs applications needed
