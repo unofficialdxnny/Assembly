@@ -9,9 +9,18 @@ import keyboard as kb
 from pystyle import *
 from time import sleep
 from elevate import elevate
+import playsound
+import threading
+from rich.console import Console
+import urllib.request
+import itertools
+from colorama import *
+import time
 
 
-elevate()
+
+
+
 
 banner = '''
 
@@ -29,7 +38,6 @@ banner = '''
 ## Change window title and prints banner
 os.system('cls & title Assembly ~ unofficialdxnny')
 print(Colorate.Horizontal(Colors.red_to_purple, Center.XCenter(banner)))
-print(Colorate.Horizontal(Colors.red_to_purple, "Getting things ready", 1))
 
 
 
@@ -62,29 +70,12 @@ def choco_installer():
 
 def aesthetics():
     ## Change mouse to .ani
-    print(Colors.red,f"Changing mouse settings...'")
-    path = r"HKEY_CURRENT_USER\Control Panel\Cursors"
+    print(Colors.green,f"Changing mouse settings...'")
+    path = r"HKEY_CURRENT_USER/Control Panel/Cursors"
     cur_loc = r"./Cursors/Normal Select.ani"
     os.system(f"""REG ADD "{path}" /v Default /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
-    os.system(f"""REG ADD "{path}" /v AppStarting /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
-    os.system(f"""REG ADD "{path}" /v Arrow /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
-    os.system(f"""REG ADD "{path}" /v Crosshair /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
-    os.system(f"""REG ADD "{path}" /v Hand /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
-    os.system(f"""REG ADD "{path}" /v Help /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
-    os.system(f"""REG ADD "{path}" /v IBeam /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
-    os.system(f"""REG ADD "{path}" /v No /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
-    os.system(f"""REG ADD "{path}" /v NWPen /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
-    os.system(f"""REG ADD "{path}" /v Person /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
-    os.system(f"""REG ADD "{path}" /v Pin /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
-    os.system(f"""REG ADD "{path}" /v SizeAll /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
-    os.system(f"""REG ADD "{path}" /v SizeNESW /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
-    os.system(f"""REG ADD "{path}" /v SizeNS /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
-    os.system(f"""REG ADD "{path}" /v SizeNWSE /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
-    os.system(f"""REG ADD "{path}" /v SizeWE /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
-    os.system(f"""REG ADD "{path}" /v UpArrow /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
-    os.system(f"""REG ADD "{path}" /v Wait /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
     ctypes.windll.user32.SystemParametersInfoA(0x57)
-    print(Colors.red,f"Completed Mouse Changes")
+    print(Colors.green,f"Completed Mouse Changes")
     ## Change WP
     ctypes.windll.user32.SystemParametersInfoW(20, 0, "Wallpaper.jpeg" , 0)
 
@@ -99,8 +90,25 @@ def spotify():
     os.system('SpotXBasic.bat')
     print(Colors.green,f"Completed Successfully")
 
-    
 
+def performance():
+        print(Colors.green,f"Enabling best Performance Mode")
+        os.system('powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61')
+        ## direct
+        os.system('powercfg.exe /setactive a1841308-3541-4fab-bc81-f71556f20b4a')
+        ## balanced
+        os.system('powercfg.exe /setactive 381b4222-f694-41f0-9685-ff5bb260df2e')
+        ## High Performance
+        os.system('powercfg.exe /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c')
+        ## Ultimate performance
+        os.system('powercfg /setactive e9a42b02-d5df-448d-aa00-03f14749eb61')
+        print('')
+        print(Colors.green,f"Active PowerPlan")
+        print('')
+        os.system('powercfg /GetActiveScheme')
+
+performance() ## adds best performance
 aesthetics() ## Sets visuals up
 spotify() ## Installs Spotify Premium Patch
-## choco_installer() ## Installs applications needed
+elevate()
+choco_installer() ## Installs applications needed
