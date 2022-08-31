@@ -77,11 +77,14 @@ def aesthetics():
     ctypes.windll.user32.SystemParametersInfoA(0x57)
     print(Colors.green,f"Completed Mouse Changes")
     ## Change WP
-    ctypes.windll.user32.SystemParametersInfoW(20, 0, "Wallpaper.jpeg" , 0)
+    img_data = requests.get("https://hdqwalls.com/badass-deadpool-wallpaper").content
+    username = getpass.getuser()
+    with open(f'C:/Users/{username}/Pictures/wallpaper.jpg', 'wb') as handler:
+        handler.write(img_data)
+        os.system(f'reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v Wallpaper /t REG_SZ /d  C:/Users/{username}/Pictures/wallpaper.jpg')
+        os.system('RUNDLL32.EXE user32.dll, UpdatePerUserSystemParameters')
 
-
-
-    print(Colors.red,f"Failed To Change Windows Wallpaper'")
+    print(Colors.green,f"Wallpaper Set'")
     sleep(3)
 
 
@@ -107,8 +110,9 @@ def performance():
         print('')
         os.system('powercfg /GetActiveScheme')
 
+
 performance() ## adds best performance
 aesthetics() ## Sets visuals up
 spotify() ## Installs Spotify Premium Patch
-elevate()
+elevate() ## UAC
 choco_installer() ## Installs applications needed
