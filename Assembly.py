@@ -34,7 +34,7 @@ data = json.load(f)
 if data['windows'] == '':
     while True:
         print(Colors.red,f"INSUFFICIENT VALUE IN 'config.json'")
-        sleep(5)
+        sleep(1)
 
 else:
     ## Change window title and prints banner
@@ -78,15 +78,6 @@ else:
         os.system(f"""REG ADD "{path}" /v Default /t REG_EXPAND_SZ /d "{cur_loc}" /f""")
         ctypes.windll.user32.SystemParametersInfoA(0x57)
         print(Colors.green,f"Completed Mouse Changes")
-        ## Change WP
-        img_data = requests.get("https://hdqwalls.com/badass-deadpool-wallpaper").content
-        username = getpass.getuser()
-        with open(f'C:/Users/{username}/Pictures/wallpaper.jpg', 'wb') as handler:
-            handler.write(img_data)
-            os.system(f'reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v Wallpaper /t REG_SZ /d  C:/Users/{username}/Pictures/wallpaper.jpg')
-            os.system('RUNDLL32.EXE user32.dll, UpdatePerUserSystemParameters')
-    
-        print(Colors.green,f"Wallpaper Set'")
         sleep(3)
     
     
@@ -97,7 +88,7 @@ else:
     
     
     def performance():
-            print(Colors.green,f"Enabling best Performance Mode")
+            print(Colors.green,f"Enabling Best PowerPlan")
             os.system('powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61')
             ## direct
             os.system('powercfg.exe /setactive a1841308-3541-4fab-bc81-f71556f20b4a')
@@ -109,6 +100,7 @@ else:
             os.system('powercfg /setactive e9a42b02-d5df-448d-aa00-03f14749eb61')
             print('')
             print(Colors.green,f"Best PowerPlan Activated")
+           
             
     ## def win_activate():
     ##     os.system('slmgr/ipk W269N-WFGWX-YVC9B-4J6C9-T83GX')
@@ -175,7 +167,13 @@ else:
         else:
             print(Colors.red,f"Windows Version Not Found")
     
-    win_activate()
+
+    def check_updates():
+        print(Colors.green,f"Checking For Updates")
+        os.system('wuauclt /detectnow /updatenow')
+
+
+    win_activate() ## activates windows
     performance() ## adds best performance
     aesthetics() ## Sets visuals up
     spotify() ## Installs Spotify Premium Patch
