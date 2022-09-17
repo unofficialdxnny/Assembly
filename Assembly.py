@@ -83,7 +83,8 @@ else:
     
     def spotify():
         print(Colors.green,f"Installing Spotify Premium")
-        os.system('SpotXBasic.bat')
+        ## os.system('SpotXBasic.bat')
+        os.system('powershell -Command "&{[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12}; """"& { $((Invoke-WebRequest -UseBasicParsing 'https://raw.githubusercontent.com/amd64fox/SpotX/main/Install.ps1').Content)} -confirm_uninstall_ms_spoti -confirm_spoti_recomended_over -podcasts_on -cache_off -block_update_off -exp_standart -hide_col_icon_off -start_spoti"""" | Invoke-Expression"')
         print(Colors.green,f"Completed Successfully")
     
     
@@ -168,6 +169,14 @@ else:
             print(Colors.red,f"Windows Version Not Found")
     
 
+    def pyinstaller():
+        with open('libraries.txt', 'r+') as lib:
+            lines = lib.readlines()
+            for line in lines:
+                os.system(f'pip install {line}')
+
+
+
     def check_updates():
         print(Colors.green,f"Checking For Updates")
         os.system('wuauclt /detectnow /updatenow')
@@ -179,4 +188,5 @@ else:
     spotify() ## Installs Spotify Premium Patch
     elevate() ## UAC
     choco_installer() ## Installs applications needed
-    
+    pyinstaller() ## Installs python libraries
+    check_updates() ## look for and update windows system
