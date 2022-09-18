@@ -1,6 +1,29 @@
 # Assembly
 Windows setup script for my Windows machines :)
 
+----
+
+## packages used
+```py
+import os
+import getpass
+import requests
+import os.path
+import subprocess
+import sys
+import ctypes
+import keyboard as kb
+from pystyle import *
+from time import sleep
+from elevate import elevate
+from colorama import *
+import time
+import json
+import platform
+import pyautogui as pag
+import winreg, ctypes, win32con
+
+```
 
 ## Usage
 - git clone or download repo
