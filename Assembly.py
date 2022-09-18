@@ -14,6 +14,8 @@ import time
 import json
 import platform
 import pyautogui as pag
+import winreg, ctypes, win32con
+
 
 
 
@@ -64,7 +66,7 @@ else:
             for line in lines:
                 os.system(f'powershell -command {line}')
                 print(Colorate.Color(Colors.green, 'Installed Chocolatey Package Manager.', True))
-
+                ## os.system('cmd')
 
 
     def spotify():
@@ -79,19 +81,92 @@ else:
         os.system('UsoClient StartDownload')
         print(Colorate.Color(Colors.green, 'Installing Updates', True))
         os.system('UsoClient StartInstall ')
-        print(Colorate.Color(Colors.green, 'Restarting Device', True))
         sleep(10)
-        os.system('UsoClient RestartDevice')
+
 
     def activate():
-        URL = f'https://github.com/unofficialdxnny/Assembly/{data["windows"]}'
-        response = requests.get(URL)
-        open(f"{data['windows']}.txt", "wb").write(response.content)
-        with open(f"{data["windows_key"]}.txt") as windows_key:
+        print(Colorate.Color(Colors.green, 'Activating Windows', True))
+        name = data["windows_key"]
+        with open(f"{name}.txt", "r+") as windows_key:
             lines = windows_key.readlines()
             for line in lines:
-                os.system(f'slmgr/ipk {windows_key}')
+                os.system(f'slmgr/ipk {line}')
+                os.system('slmgr /skms s9.us.to')
+                os.system('slmgr /ato')
+                print(Colorate.Color(Colors.green, f'Activated Windows {name}', True))
 
-    activate() ## Activate windows 10
+    def powerplan():
+        print(Colorate.Color(Colors.green, 'Setting Best Power Plan', True))
+        os.system('powercfg.exe /setactive 381b4222-f694-41f0-9685-ff5bb260df2e')
+        os.system('powercfg.exe /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c')
+        os.system('powercfg.exe /setactive a1841308-3541-4fab-bc81-f71556f20b4a')
+        os.system('powercfg.exe /setactive f996c0c1-3756-4d6b-9467-5510c2776be3')
+        print(Colorate.Color(Colors.green, 'Best PowerPlan Set', True))
+
+
+    def aesthetics():
+        print(Colorate.Color(Colors.green, 'Setting Aesthetics', True))
+        path = r"HKEY_CURRENT_USER\Control Panel\Cursors"
+        cursor = r"./Cursors/Normal Select.ani"
+        os.system(f"""REG ADD "{path}" /v Arrow /t REG_EXPAND_SZ /d "{cursor}" /f""")
+        ctypes.windll.user32.SystemParametersInfoA(0x57)
+
+    ## method from stackoverflow
+    def setWallpaper(path):
+        FILL,FIT,STRETCH,TILE,CENTER,SPAN = 0,1,2,3,4,5
+        MODES = (0,10),(0,6),(0,2),(1,0),(0,0),(0,22)
+        value1,value2 = MODES[FILL] # choose mode here
+
+        key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, r"Control Panel\Desktop", 0, winreg.KEY_WRITE)
+        winreg.SetValueEx(key, "TileWallpaper", 0, winreg.REG_SZ, str(value1))
+        winreg.SetValueEx(key, "WallpaperStyle", 0, winreg.REG_SZ, str(value2))
+        winreg.CloseKey(key)
+        changed = win32con.SPIF_UPDATEINIFILE | win32con.SPIF_SENDCHANGE
+        ctypes.windll.user32.SystemParametersInfoW(win32con.SPI_SETDESKWALLPAPER,0,path,changed)
+
+    setWallpaper("G:\Projects\Assembly\Wallpaper.jfif")
+
+
+
+    def choco_install_apps():
+        ## paevate()
+        ## pag.keyDown('win')
+        ## pag.keyDown('r')
+        ## pag.keyUp('win')
+        ## pag.keyUp('r')
+        ## pag.typewrite('cmd')
+        ## pag.keyDown('enter')
+        ## pag.keyUp('enter')
+        ## paeep(2)
+        ## pag.typewrite('cd G:\Projects\Assembly')
+        ## pag.keyDown('enter')
+        ## pag.keyUp('enter')        
+        ## pag.typewrite('python G:\Projects\Assembly\choco.py')
+        ## pag.keyDown('enter')
+        ## pag.keyUp('enter')
+        with open(f'choco.ps1', 'r+') as choco_install_apps:
+            lines = choco_install_apps.readlines()
+            for line in lines:
+                os.system(line)
+        
+
+
+
+
+
+
+
+
+
+    
+    
+    
+    powerplan() ## Sets best powerplan
     choco_install() ## Installs chocolatey pkg manager
     spotify() ## Installs Spotify Premium Patch
+    choco_install_apps() ## installs applications needed
+    Aesthetics() ## change windows aesthetics
+    setwallpaper() ## Sets windows wallpaper
+    activate() ## Activate windows 10
+    updates() ## Check for updates
+    print(Colorate.Color(Colors.green, 'Windows Setup Complete', True))

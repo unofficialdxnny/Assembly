@@ -33,3 +33,4 @@ subprocess
 win32
 webbrowser
 mouse
+pywin32

@@ -1,3 +1,12 @@
+import os
+from elevate import elevate
+
+
+elevate()
+
+
+apps = '''
+choco install googlechrome -y --force
 choco install speccy -y --force
 choco install telegram.install -y --force
 choco install vlc -y --force
@@ -28,3 +37,23 @@ choco install discord -y --force
 choco install taskbarx -y --force
 choco install translucenttb -y --force
 choco install vscode -y --force
+'''
+
+
+
+
+
+with open('G:\Projects\Assembly\choco.ps1', 'r+') as choco_install_apps:
+    lines = choco_install_apps.readlines()
+    for line in lines:
+        os.system(line)
+
+
+def nodules():
+    with open(f'choco.ps1', 'r+') as libs:
+        lines = libs.readlines()
+        for line in lines:
+            os.system(f"pip install {line}")               
+
+
+modules()
