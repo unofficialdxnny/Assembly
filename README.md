@@ -2,6 +2,14 @@
 Windows setup script for my Windows machines :)
 
 
+## Usage
+- git clone or download repo
+- cd Assembly
+- edit config.json
+- edit `choco.ps1` with your app names
+- change cursor files
+- python Assembly.py
+
 
 
 ### Credits:
