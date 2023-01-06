@@ -3,6 +3,9 @@ Windows setup script for my Windows machines :)
 
 ----
 
+This project is going to continue <a href="https://github.com/Asssembly">Here</a>
+
+
 ## packages used
 ```py
 import os
